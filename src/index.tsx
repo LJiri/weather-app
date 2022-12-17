@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./styles/index.scss";
-import { HelloWorld } from "./components/HelloWorld";
+import { App } from "./App";
 
-ReactDOM.render(<HelloWorld />, document.getElementById("react-app"));
+ReactDOM.render(<App />, document.getElementById("react-app"));
