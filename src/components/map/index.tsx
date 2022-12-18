@@ -3,7 +3,6 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useWeather } from "../../store";
 
 function Map() {
-    // @ts-ignore
     const { location, weather, setLocation } = useWeather();
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
@@ -11,7 +10,7 @@ function Map() {
         googleMapsApiKey: "AIzaSyByvUegCZkBw3Z0B5KnEdBvws3qc6OBmws",
     });
 
-    const center = { lat: Number(weather?.coord?.lat), lng: Number(weather?.coord?.lon) };
+    const center = { lat: Number(location.lat), lng: Number(location.lng) };
 
     return isLoaded && weather ? (
         <GoogleMap

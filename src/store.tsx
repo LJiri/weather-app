@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from "react";
+import { LocationHistory, Coords, Weather, WeatherSourceState, WeatherSourceAction } from "./types";
 
-type Coords = { lat: number; lng: number };
-type LocationHistory = { name: string; coords: Coords };
-
-const addLocationToLocalStorate = ({ coords, name }: LocationHistory) => {
+const addLocationToLocalStorage = ({ coords, name }: LocationHistory) => {
     const locationHistory: LocationHistory[] = JSON.parse(localStorage.getItem("locationHistory"));
 
     if (locationHistory && locationHistory.length > 0) {
@@ -17,10 +15,13 @@ const addLocationToLocalStorate = ({ coords, name }: LocationHistory) => {
     console.log(localStorage.setItem("locationHistory", JSON.stringify([...locationHistory, { coords, name }])));
 };
 
-const useWeatherSource = () => {
+const useWeatherSource = (): {
+    location: Coords;
+    weather: Weather;
+    setLocation: (coords: Coords) => void;
+} => {
     const [{ weather, location }, dispatch] = useReducer(
-        // @ts-ignore
-        (state, action) => {
+        (state: WeatherSourceState, action: WeatherSourceAction) => {
             switch (action.type) {
                 case "SET_WEATHER":
                     return { ...state, weather: action.payload.weather, location: action.payload.location };
@@ -31,8 +32,8 @@ const useWeatherSource = () => {
                 lat: 51.5072,
                 lng: 0.1276,
             },
-            weather: {},
-            locationHistory: localStorage.getItem("locationHistory") ?? [],
+            weather: null,
+            locationHistory: JSON.parse(localStorage.getItem("locationHistory")),
         },
     );
 
@@ -42,8 +43,15 @@ const useWeatherSource = () => {
                 `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&units=metric&appid=f9a6a093213359be775456e986a62e93`,
             );
             const data = await response.json();
-            addLocationToLocalStorate({ coords, name: data.name });
-            dispatch({ type: "SET_WEATHER", payload: { weather: data, location: coords } });
+            const weather: Weather = {
+                coords,
+                name: data.name,
+                temperature: {
+                    averageTemperature: data?.main?.temp,
+                },
+            };
+            addLocationToLocalStorage({ coords, name: data.name });
+            dispatch({ type: "SET_WEATHER", payload: { weather: weather, location: coords } });
         } catch (error) {
             console.error(error);
         }
@@ -56,7 +64,8 @@ const useWeatherSource = () => {
     return { location: location, weather: weather, setLocation: setLocation };
 };
 
-const WeatherContext = createContext({});
+// check later
+const WeatherContext = createContext<ReturnType<typeof useWeatherSource>>({} as unknown as ReturnType<typeof useWeatherSource>);
 
 export const useWeather = () => useContext(WeatherContext);
 
