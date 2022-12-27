@@ -3,11 +3,11 @@ import { useWeather } from "../../store";
 import "./style.scss";
 
 export const LocationHistory = () => {
-    const { locationHistory, setLocation, clearLocationHistory, deleteLocation } = useWeather();
-    return locationHistory && locationHistory.length > 0 ? (
+    const { locations, setLocation, clearLocationHistory, deleteLocationById } = useWeather();
+    return locations && locations.length > 0 ? (
         <div className="wa-location-history">
             <div>
-                {locationHistory
+                {locations
                     .slice()
                     .reverse()
                     .map((location, index) => (
@@ -15,7 +15,7 @@ export const LocationHistory = () => {
                             <button className="wa-location-history__select-btn" onClick={() => setLocation(location.coords)}>
                                 {location.name}
                             </button>
-                            <button className="wa-location-history__delete-btn" onClick={() => deleteLocation(location.id)}>
+                            <button className="wa-location-history__delete-btn" onClick={() => deleteLocationById(location.id)}>
                                 x
                             </button>
                         </div>

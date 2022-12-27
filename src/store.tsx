@@ -7,25 +7,25 @@ const locationStorage = new LocationStorage();
 const useWeatherSource = (): {
     location: Coords;
     weather: Weather;
-    locationHistory: Location[];
+    locations: Location[];
     setLocation: (coords: Coords) => void;
     clearLocationHistory: () => void;
-    deleteLocation: (id: string) => void;
+    deleteLocationById: (id: string) => void;
 } => {
-    const [{ weather, location, locationHistory }, dispatch] = useReducer(
+    const [{ weather, location, locations }, dispatch] = useReducer(
         (state: WeatherSourceState, action: WeatherSourceActions) => {
             switch (action.type) {
-                case "SET_WEATHER":
+                case "SET_LOCATION":
                     return {
                         ...state,
                         weather: action.payload.weather,
                         location: action.payload.location,
-                        locationHistory: locationStorage.locationsExceptLast,
+                        locations: locationStorage.locationsExceptLast,
                     };
-                case "CLEAR_LOCATION_HISTORY":
-                    return { ...state, locationHistory: locationStorage.locationsExceptLast };
-                case "DELETE_LOCATION":
-                    return { ...state, locationHistory: locationStorage.locationsExceptLast };
+                case "DELETE_LOCATIONS":
+                    return { ...state, locations: locationStorage.locationsExceptLast };
+                case "DELETE_LOCATION_BY_ID":
+                    return { ...state, locations: locationStorage.locationsExceptLast };
             }
         },
         {
@@ -34,7 +34,7 @@ const useWeatherSource = (): {
                 lng: 0.1276,
             },
             weather: null,
-            locationHistory: JSON.parse(localStorage.getItem("locationHistory")),
+            locations: locationStorage.locationsExceptLast,
         },
     );
 
@@ -52,7 +52,7 @@ const useWeatherSource = (): {
                 },
             };
             locationStorage.save({ coords, name: data.name });
-            dispatch({ type: "SET_WEATHER", payload: { weather: weather, location: coords } });
+            dispatch({ type: "SET_LOCATION", payload: { weather: weather, location: coords } });
         } catch (error) {
             console.error(error);
         }
@@ -64,15 +64,15 @@ const useWeatherSource = (): {
 
     const clearLocationHistory = useCallback(() => {
         locationStorage.deleteAllExceptLast();
-        dispatch({ type: "CLEAR_LOCATION_HISTORY" });
+        dispatch({ type: "DELETE_LOCATIONS" });
     }, []);
 
-    const deleteLocation = useCallback((id: string) => {
+    const deleteLocationById = useCallback((id: string) => {
         locationStorage.deleteById(id);
-        dispatch({ type: "DELETE_LOCATION" });
+        dispatch({ type: "DELETE_LOCATION_BY_ID" });
     }, []);
 
-    return { location, weather, locationHistory, setLocation, clearLocationHistory, deleteLocation };
+    return { location, weather, locations, setLocation, clearLocationHistory, deleteLocationById };
 };
 
 // check later

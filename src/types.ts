@@ -14,13 +14,13 @@ export interface Weather {
 export interface WeatherSourceState {
     location: Coords;
     weather: Weather;
-    locationHistory: Location[];
+    locations: Location[];
 }
 
 export type WeatherSourceActions = SetWeatherAction | ClearLocationHistoryAction | DeleteLocationAction;
 
 interface SetWeatherAction {
-    type: "SET_WEATHER";
+    type: "SET_LOCATION";
     payload: {
         location: Coords;
         weather: Weather;
@@ -28,9 +28,9 @@ interface SetWeatherAction {
 }
 
 interface ClearLocationHistoryAction {
-    type: "CLEAR_LOCATION_HISTORY";
+    type: "DELETE_LOCATIONS";
 }
 
 interface DeleteLocationAction {
-    type: "DELETE_LOCATION";
+    type: "DELETE_LOCATION_BY_ID";
 }
