@@ -1,30 +1,31 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from "react";
-import { LocationHistory, Coords, Weather, WeatherSourceState, WeatherSourceAction } from "./types";
+import { Location, Coords, Weather, WeatherSourceState, WeatherSourceActions } from "./types";
+import { LocationStorage } from "./LocationStorage";
 
-const addLocationToLocalStorage = ({ coords, name }: LocationHistory) => {
-    const locationHistory: LocationHistory[] = JSON.parse(localStorage.getItem("locationHistory"));
-
-    if (locationHistory && locationHistory.length > 0) {
-        const lastItem = locationHistory[locationHistory.length - 1];
-
-        if (lastItem.coords.lat == coords.lat && lastItem.coords.lng == coords.lng) {
-            return;
-        }
-    }
-
-    console.log(localStorage.setItem("locationHistory", JSON.stringify([...locationHistory, { coords, name }])));
-};
+const locationStorage = new LocationStorage();
 
 const useWeatherSource = (): {
     location: Coords;
     weather: Weather;
+    locationHistory: Location[];
     setLocation: (coords: Coords) => void;
+    clearLocationHistory: () => void;
+    deleteLocation: (id: string) => void;
 } => {
-    const [{ weather, location }, dispatch] = useReducer(
-        (state: WeatherSourceState, action: WeatherSourceAction) => {
+    const [{ weather, location, locationHistory }, dispatch] = useReducer(
+        (state: WeatherSourceState, action: WeatherSourceActions) => {
             switch (action.type) {
                 case "SET_WEATHER":
-                    return { ...state, weather: action.payload.weather, location: action.payload.location };
+                    return {
+                        ...state,
+                        weather: action.payload.weather,
+                        location: action.payload.location,
+                        locationHistory: locationStorage.locationsExceptLast,
+                    };
+                case "CLEAR_LOCATION_HISTORY":
+                    return { ...state, locationHistory: locationStorage.locationsExceptLast };
+                case "DELETE_LOCATION":
+                    return { ...state, locationHistory: locationStorage.locationsExceptLast };
             }
         },
         {
@@ -50,7 +51,7 @@ const useWeatherSource = (): {
                     averageTemperature: data?.main?.temp,
                 },
             };
-            addLocationToLocalStorage({ coords, name: data.name });
+            locationStorage.save({ coords, name: data.name });
             dispatch({ type: "SET_WEATHER", payload: { weather: weather, location: coords } });
         } catch (error) {
             console.error(error);
@@ -61,7 +62,17 @@ const useWeatherSource = (): {
         setLocation(location);
     }, []);
 
-    return { location: location, weather: weather, setLocation: setLocation };
+    const clearLocationHistory = useCallback(() => {
+        locationStorage.deleteAllExceptLast();
+        dispatch({ type: "CLEAR_LOCATION_HISTORY" });
+    }, []);
+
+    const deleteLocation = useCallback((id: string) => {
+        locationStorage.deleteById(id);
+        dispatch({ type: "DELETE_LOCATION" });
+    }, []);
+
+    return { location, weather, locationHistory, setLocation, clearLocationHistory, deleteLocation };
 };
 
 // check later

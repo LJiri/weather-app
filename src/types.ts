@@ -1,5 +1,5 @@
 export type Coords = { lat: number; lng: number };
-export type LocationHistory = { name: string; coords: Coords };
+export type Location = { id: string; name: string; coords: Coords };
 
 interface Temperature {
     averageTemperature: number;
@@ -14,13 +14,23 @@ export interface Weather {
 export interface WeatherSourceState {
     location: Coords;
     weather: Weather;
-    locationHistory: LocationHistory[];
+    locationHistory: Location[];
 }
 
-export interface WeatherSourceAction {
+export type WeatherSourceActions = SetWeatherAction | ClearLocationHistoryAction | DeleteLocationAction;
+
+interface SetWeatherAction {
     type: "SET_WEATHER";
     payload: {
         location: Coords;
         weather: Weather;
     };
+}
+
+interface ClearLocationHistoryAction {
+    type: "CLEAR_LOCATION_HISTORY";
+}
+
+interface DeleteLocationAction {
+    type: "DELETE_LOCATION";
 }
