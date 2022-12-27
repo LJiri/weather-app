@@ -1,8 +1,8 @@
 import React from "react";
-import { useWeather } from "../../store";
+import { useLocation } from "../../store";
 
 export const WeatherBasicInfo = () => {
-    const { weather } = useWeather();
+    const { weather } = useLocation();
 
     return weather ? (
         <div>

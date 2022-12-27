@@ -1,16 +1,14 @@
 import React, { useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import { useWeather } from "../../store";
+import { useLocation } from "../../store";
 
 function Map() {
-    const { location, weather, setLocation } = useWeather();
+    const { location, weather, setLocation } = useLocation();
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
         // Api key souĺd be hidden. Not possible here without backend.
         googleMapsApiKey: "AIzaSyByvUegCZkBw3Z0B5KnEdBvws3qc6OBmws",
     });
-
-    // const center = { lat: Number(location.lat), lng: Number(location.lng) };
 
     const [center, setCenter] = useState({ lat: Number(location.lat), lng: Number(location.lng) });
 
@@ -23,8 +21,9 @@ function Map() {
     return isLoaded && weather ? (
         <GoogleMap
             center={center}
-            onLoad={onLoad}
             zoom={10}
+            options={{ fullscreenControl: false }}
+            onLoad={onLoad}
             onClick={map => {
                 setLocation({ lat: map.latLng.lat(), lng: map.latLng.lng() });
             }}

@@ -1,19 +1,19 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from "react";
-import { Location, Coords, Weather, WeatherSourceState, WeatherSourceActions } from "./types";
+import { Location, Coords, Weather, LocationSourceState, LocationSourceActions } from "./types";
 import { LocationStorage } from "./LocationStorage";
 
 const locationStorage = new LocationStorage();
 
-const useWeatherSource = (): {
+const useLocationSource = (): {
     location: Coords;
     weather: Weather;
     locations: Location[];
     setLocation: (coords: Coords) => void;
-    clearLocationHistory: () => void;
+    deleteLocations: () => void;
     deleteLocationById: (id: string) => void;
 } => {
     const [{ weather, location, locations }, dispatch] = useReducer(
-        (state: WeatherSourceState, action: WeatherSourceActions) => {
+        (state: LocationSourceState, action: LocationSourceActions) => {
             switch (action.type) {
                 case "SET_LOCATION":
                     return {
@@ -62,7 +62,7 @@ const useWeatherSource = (): {
         setLocation(location);
     }, []);
 
-    const clearLocationHistory = useCallback(() => {
+    const deleteLocations = useCallback(() => {
         locationStorage.deleteAllExceptLast();
         dispatch({ type: "DELETE_LOCATIONS" });
     }, []);
@@ -72,14 +72,14 @@ const useWeatherSource = (): {
         dispatch({ type: "DELETE_LOCATION_BY_ID" });
     }, []);
 
-    return { location, weather, locations, setLocation, clearLocationHistory, deleteLocationById };
+    return { location, weather, locations, setLocation, deleteLocations, deleteLocationById };
 };
 
 // check later
-const WeatherContext = createContext<ReturnType<typeof useWeatherSource>>({} as unknown as ReturnType<typeof useWeatherSource>);
+const LocationContext = createContext<ReturnType<typeof useLocationSource>>({} as unknown as ReturnType<typeof useLocationSource>);
 
-export const useWeather = () => useContext(WeatherContext);
+export const useLocation = () => useContext(LocationContext);
 
-export const WeatherContextProvider = ({ children }: { children: React.ReactNode }) => (
-    <WeatherContext.Provider value={useWeatherSource()}>{children}</WeatherContext.Provider>
+export const LocationContextProvider = ({ children }: { children: React.ReactNode }) => (
+    <LocationContext.Provider value={useLocationSource()}>{children}</LocationContext.Provider>
 );

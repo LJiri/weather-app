@@ -1,9 +1,9 @@
 import React from "react";
-import { useWeather } from "../../store";
+import { useLocation } from "../../store";
 import "./style.scss";
 
 export const LocationHistory = () => {
-    const { locations, setLocation, clearLocationHistory, deleteLocationById } = useWeather();
+    const { locations, setLocation, deleteLocations, deleteLocationById } = useLocation();
     return locations && locations.length > 0 ? (
         <div className="wa-location-history">
             <div>
@@ -21,7 +21,7 @@ export const LocationHistory = () => {
                         </div>
                     ))}
             </div>
-            <button onClick={clearLocationHistory}>Clear history</button>
+            <button onClick={deleteLocations}>Clear history</button>
         </div>
     ) : (
         <div>Locatin history is empty</div>

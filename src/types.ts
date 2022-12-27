@@ -11,15 +11,15 @@ export interface Weather {
     temperature: Temperature;
 }
 
-export interface WeatherSourceState {
+export interface LocationSourceState {
     location: Coords;
     weather: Weather;
     locations: Location[];
 }
 
-export type WeatherSourceActions = SetWeatherAction | ClearLocationHistoryAction | DeleteLocationAction;
+export type LocationSourceActions = SetLocationAction | ClearLocationHistoryAction | DeleteLocationAction;
 
-interface SetWeatherAction {
+interface SetLocationAction {
     type: "SET_LOCATION";
     payload: {
         location: Coords;
