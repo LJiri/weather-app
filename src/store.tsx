@@ -3,16 +3,22 @@ import { Location, Coords, Weather, LocationSourceState, LocationSourceActions }
 import { LocationStorage } from "./LocationStorage";
 
 const locationStorage = new LocationStorage();
+const INITIAL_LOCATION = locationStorage.lastLocation?.coords || {
+    lat: 51.5072,
+    lng: 0.1276,
+};
 
 const useLocationSource = (): {
     location: Coords;
+    mapCenter: Coords;
     weather: Weather;
     locations: Location[];
     setLocation: (coords: Coords) => void;
+    setMapCenter: (coords: Coords) => void;
     deleteLocations: () => void;
     deleteLocationById: (id: string) => void;
 } => {
-    const [{ weather, location, locations }, dispatch] = useReducer(
+    const [{ weather, location, locations, mapCenter }, dispatch] = useReducer(
         (state: LocationSourceState, action: LocationSourceActions) => {
             switch (action.type) {
                 case "SET_LOCATION":
@@ -20,19 +26,20 @@ const useLocationSource = (): {
                         ...state,
                         weather: action.payload.weather,
                         location: action.payload.location,
+                        // mapCenter: action.payload.mapCenter || state.mapCenter,
                         locations: locationStorage.locationsExceptLast,
                     };
                 case "DELETE_LOCATIONS":
                     return { ...state, locations: locationStorage.locationsExceptLast };
                 case "DELETE_LOCATION_BY_ID":
                     return { ...state, locations: locationStorage.locationsExceptLast };
+                case "SET_MAP_CENTER":
+                    return { ...state, mapCenter: action.payload.mapCenter };
             }
         },
         {
-            location: {
-                lat: 51.5072,
-                lng: 0.1276,
-            },
+            location: INITIAL_LOCATION,
+            mapCenter: INITIAL_LOCATION,
             weather: null,
             locations: locationStorage.locationsExceptLast,
         },
@@ -58,7 +65,26 @@ const useLocationSource = (): {
         }
     }, []);
 
+    const setMapCenter = useCallback((coords: Coords) => {
+        dispatch({
+            type: "SET_MAP_CENTER",
+            payload: { mapCenter: { lat: coords.lat, lng: coords.lng } },
+        });
+    }, []);
+
     useEffect(() => {
+        if (locationStorage.isEmpty && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                geolocation => {
+                    setLocation({ lat: geolocation.coords.latitude, lng: geolocation.coords.longitude });
+                    setMapCenter({ lat: geolocation.coords.latitude, lng: geolocation.coords.longitude });
+                },
+                () => {
+                    setLocation(location);
+                },
+            );
+            return;
+        }
         setLocation(location);
     }, []);
 
@@ -72,7 +98,7 @@ const useLocationSource = (): {
         dispatch({ type: "DELETE_LOCATION_BY_ID" });
     }, []);
 
-    return { location, weather, locations, setLocation, deleteLocations, deleteLocationById };
+    return { location, mapCenter, weather, locations, setLocation, setMapCenter, deleteLocations, deleteLocationById };
 };
 
 // check later

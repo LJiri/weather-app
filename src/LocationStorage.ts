@@ -7,11 +7,11 @@ export class LocationStorage {
         return JSON.parse(localStorage.getItem(LOCATIONS)) ?? [];
     }
 
-    private get isEmpty(): boolean {
+    get isEmpty(): boolean {
         return !this.locations || this.locations.length == 0;
     }
 
-    private get lastLocation(): Location {
+    get lastLocation(): Location {
         return this.isEmpty ? null : this.locations[this.locations.length - 1];
     }
 

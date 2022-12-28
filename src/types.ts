@@ -13,17 +13,29 @@ export interface Weather {
 
 export interface LocationSourceState {
     location: Coords;
+    mapCenter: Coords;
     weather: Weather;
     locations: Location[];
 }
 
-export type LocationSourceActions = SetLocationAction | ClearLocationHistoryAction | DeleteLocationAction;
+export type LocationSourceActions =
+    | SetLocationAction
+    | ClearLocationHistoryAction
+    | DeleteLocationAction
+    | SetMapCenterAction;
 
 interface SetLocationAction {
     type: "SET_LOCATION";
     payload: {
         location: Coords;
         weather: Weather;
+    };
+}
+
+interface SetMapCenterAction {
+    type: "SET_MAP_CENTER";
+    payload: {
+        mapCenter: Coords;
     };
 }
 
