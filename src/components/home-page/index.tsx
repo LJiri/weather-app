@@ -9,6 +9,7 @@ export const HomePage = () => {
         <div className="wa-home-page">
             <WeatherBasicInfo />
             <LocationHistory />
+            <div>Choose location on the map</div>
             <Map />
         </div>
     );

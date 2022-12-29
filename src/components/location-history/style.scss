@@ -1,0 +1,72 @@
+.wa-location-history {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+
+    &__header {
+        padding-bottom: 10px;
+    }
+
+    &__content {
+        overflow: auto;
+        // &::-webkit-scrollbar {
+        //     width: 10px;
+        //     background-color: none;
+        //   }
+
+        // &::-webkit-scrollbar-thumb {
+        //     background: yellow;
+        //   }
+        // &::-webkit-scrollbar-track {
+        //     background: none;
+        //   }
+
+    }
+
+    &__location {
+        display: flex;
+        width: 200px;
+        height: 24px;
+        margin: 0 auto 5px auto;
+        border-radius: 9px;
+        background: #fff;
+    }
+
+    &__select-btn {
+        flex-grow: 1;
+        border: none;
+        background: none;
+        text-align: start;
+        padding: 0 20px;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    &__delete-btn {
+        flex-shrink: 0;
+        width: 24px;
+        border: none;
+        background: none;
+        border-left: 1px solid #000;
+        cursor: pointer;
+    }
+
+    &__clear-history {
+        padding-top: 10px;
+    }
+
+    &__clear-history-btn {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+        width: 150px;
+        border-radius: 9px;
+        background: #fff;
+        border: none;
+        cursor: pointer;
+    }
+}

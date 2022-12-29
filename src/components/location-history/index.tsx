@@ -4,26 +4,33 @@ import "./style.scss";
 
 export const LocationHistory = () => {
     const { locations, setLocation, deleteLocations, deleteLocationById } = useLocation();
-    return locations && locations.length > 0 ? (
+    return (
         <div className="wa-location-history">
-            <div>
-                {locations
-                    .slice()
-                    .reverse()
-                    .map((location, index) => (
-                        <div key={index} className="wa-location-history__item">
-                            <button className="wa-location-history__select-btn" onClick={() => setLocation(location.coords)}>
-                                {location.name}
-                            </button>
-                            <button className="wa-location-history__delete-btn" onClick={() => deleteLocationById(location.id)}>
-                                x
-                            </button>
-                        </div>
-                    ))}
+            <div className="wa-location-history__header">History:</div>
+            <div className="wa-location-history__content">
+                {locations && locations.length > 0 ? (
+                    locations
+                        .slice()
+                        .reverse()
+                        .map((location, index) => (
+                            <div key={index} className="wa-location-history__location">
+                                <button className="wa-location-history__select-btn" onClick={() => setLocation(location.coords)}>
+                                    {location.name}
+                                </button>
+                                <button className="wa-location-history__delete-btn" onClick={() => deleteLocationById(location.id)}>
+                                    x
+                                </button>
+                            </div>
+                        ))
+                ) : (
+                    <span>Locatin history is empty...</span>
+                )}
             </div>
-            <button onClick={deleteLocations}>Clear history</button>
+            <div className="wa-location-history__clear-history">
+                <button onClick={deleteLocations} className="wa-location-history__clear-history-btn">
+                    Clear history
+                </button>
+            </div>
         </div>
-    ) : (
-        <div>Locatin history is empty</div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useLocation } from "../../store";
+import { Loader } from "../loader";
 
 function Map() {
     const { location, mapCenter, weather, setLocation, setMapCenter } = useLocation();
@@ -44,7 +45,9 @@ function Map() {
             <Marker position={location} onPositionChanged={onMarkerPositionChanged} />
         </GoogleMap>
     ) : (
-        <></>
+        <div>
+            <Loader />
+        </div>
     );
 }
 
