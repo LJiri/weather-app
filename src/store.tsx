@@ -51,12 +51,20 @@ const useLocationSource = (): {
                 `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&units=metric&appid=f9a6a093213359be775456e986a62e93`,
             );
             const data = await response.json();
+            console.log("weather: ", data);
             const weather: Weather = {
                 coords,
                 name: data.name,
-                temperature: {
-                    averageTemperature: data?.main?.temp,
-                },
+                averageTemperature: data?.main?.temp,
+                realFeel: data?.main?.feels_like,
+                humidity: data?.main?.humidity,
+                windSpeed: data?.wind.speed,
+                windGust: data?.wind.gust,
+                windDeg: data?.wind.deg,
+                icon: data.weather[0]?.icon,
+                description: data.weather[0]?.description,
+                sunrise: data?.sys?.sunrise,
+                sunset: data?.sys?.sunset,
             };
             locationStorage.save({ coords, name: data.name });
             dispatch({ type: "SET_LOCATION", payload: { weather: weather, location: coords } });

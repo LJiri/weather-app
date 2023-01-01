@@ -1,14 +1,19 @@
 export type Coords = { lat: number; lng: number };
 export type Location = { id: string; name: string; coords: Coords };
 
-interface Temperature {
-    averageTemperature: number;
-}
-
 export interface Weather {
     coords: Coords;
     name: string;
-    temperature: Temperature;
+    averageTemperature: number;
+    realFeel: number;
+    humidity: number;
+    windSpeed: number;
+    windGust: number;
+    windDeg: number;
+    icon: string;
+    description: string;
+    sunrise: string;
+    sunset: string;
 }
 
 export interface LocationSourceState {

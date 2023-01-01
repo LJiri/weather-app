@@ -1,0 +1,44 @@
+.wa-weather-info {
+    &__header {
+        font-size: 40px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__content {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    &__average-temperature {
+        font-size: 40px;
+        line-height: 40px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__description {
+        border: 1px solid #000;
+        border-radius: 9px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 25px 25px 25px;
+        font-weight: bold;
+    }
+
+    &__rows {
+        font-size: 20px;
+
+        div:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__value {
+        font-weight: bold;
+    }
+}

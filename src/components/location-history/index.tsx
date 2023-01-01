@@ -15,7 +15,7 @@ export const LocationHistory = () => {
                         .map((location, index) => (
                             <div key={index} className="wa-location-history__location">
                                 <button className="wa-location-history__select-btn" onClick={() => setLocation(location.coords)}>
-                                    {location.name}
+                                    {location.name || `${location.coords.lat.toFixed(4)}, ${location.coords.lng.toFixed(4)}`}
                                 </button>
                                 <button className="wa-location-history__delete-btn" onClick={() => deleteLocationById(location.id)}>
                                     x
@@ -23,7 +23,7 @@ export const LocationHistory = () => {
                             </div>
                         ))
                 ) : (
-                    <span>Locatin history is empty...</span>
+                    <span>Location history is empty...</span>
                 )}
             </div>
             <div className="wa-location-history__clear-history">
