@@ -1,33 +1,65 @@
 .wa-home-page {
-    width: 100%;
-    height: 100%;
-    margin: auto;
     display: grid;
-    grid-template-columns: 8fr 6fr;
-    grid-template-rows: 1fr 70px 1fr;
     gap: 20px;
 
-    & > div {
-        border-radius: 9px;
-        background: #4466ff;
-        overflow: hidden;
+    @media (min-width: 1100px) {
+        grid-template-columns: 8fr auto;
+        grid-template-rows: 380px 70px 1fr;
+        height: 100%;
     }
 
-    & > div:not(:last-child) {
+    &__container {
+        padding: 20px;
+
+        @media (min-width: 1100px) {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        @media (min-width: 1600px) {
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+    }
+
+    & > div {
+                border-radius: 9px;
+                background: #4466ff;
+                overflow: hidden;
+            }
+    
+    &__map {
+        height: 60vh;
+
+        @media (min-width: 1100px) {
+            grid-area: 3 / 1 / 4 / 3;
+            height: auto;
+        }
+    }
+
+    &__weather-info {
         padding: 20px;
     }
 
-    & > div:nth-child(3) {
-        grid-area: 2 / 1 / 3 / 3;
+    &__map-header {
+        padding: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 24px;
 
+        @media (min-width: 1100px) {
+            grid-area: 2 / 1 / 3 / 3;
+        }
     }
 
-    & > div:last-child {
-        grid-area: 3 / 1 / 4 / 3;
+    &__weather-location-history {
+        padding: 20px;
+        height: 40vh;
+
+        @media (min-width: 1100px) {
+            height: 100%;
+        }
     }
-    
+
 }

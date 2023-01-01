@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useLocation } from "../../store";
 import { Loader } from "../loader";
+import "./styles.scss";
 
 function Map() {
     const { location, mapCenter, weather, setLocation, setMapCenter } = useLocation();
@@ -35,6 +36,7 @@ function Map() {
 
     return isLoaded && weather ? (
         <GoogleMap
+            mapContainerClassName="wa-map"
             center={mapCenter}
             zoom={10}
             options={{ fullscreenControl: false }}
@@ -45,7 +47,7 @@ function Map() {
             <Marker position={location} onPositionChanged={onMarkerPositionChanged} />
         </GoogleMap>
     ) : (
-        <div>
+        <div className="wa-map-loader">
             <Loader />
         </div>
     );

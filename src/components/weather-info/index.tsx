@@ -7,7 +7,7 @@ export const WeatherInfo = () => {
     const { weather } = useLocation();
 
     return weather ? (
-        <div>
+        <div className="wa-weather-info">
             <div className="wa-weather-info__header">{weather?.name || `${weather.coords.lat.toFixed(4)}, ${weather.coords.lng.toFixed(4)}`}</div>
             <div className="wa-weather-info__content">
                 <div>

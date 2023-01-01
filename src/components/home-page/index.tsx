@@ -6,11 +6,19 @@ import "./styles.scss";
 
 export const HomePage = () => {
     return (
-        <div className="wa-home-page">
-            <WeatherInfo />
-            <LocationHistory />
-            <div>Choose location on the map</div>
-            <Map />
+        <div className="wa-home-page__container">
+            <div className="wa-home-page">
+                <div className="wa-home-page__weather-info">
+                    <WeatherInfo />
+                </div>
+                <div className="wa-home-page__map-header">Choose location on the map</div>
+                <div className="wa-home-page__map">
+                    <Map />
+                </div>
+                <div className="wa-home-page__weather-location-history">
+                    <LocationHistory />
+                </div>
+            </div>
         </div>
     );
 };
