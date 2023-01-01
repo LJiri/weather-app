@@ -1,5 +1,6 @@
 .wa-weather-info {
     height: 100%;
+    text-shadow: #fff 1px 0 24px;
 
     &__header {
         font-size: 40px;
@@ -8,7 +9,6 @@
     }
 
     &__content {
-        height: 100%;
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
@@ -23,7 +23,7 @@
     }
 
     &__description {
-        border: 1px solid #000;
+        box-shadow: #fff 1px 0 4px;
         border-radius: 9px;
         display: flex;
         flex-direction: column;

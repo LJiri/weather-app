@@ -7,22 +7,17 @@
 
     &__header {
         padding-bottom: 10px;
+        text-shadow: #fff 1px 0 24px;
+        text-align: center;
+        font-weight: bold;
     }
 
     &__content {
         overflow: auto;
-        // &::-webkit-scrollbar {
-        //     width: 10px;
-        //     background-color: none;
-        //   }
-
-        // &::-webkit-scrollbar-thumb {
-        //     background: yellow;
-        //   }
-        // &::-webkit-scrollbar-track {
-        //     background: none;
-        //   }
-
+        padding: 0 20px;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
     }
 
     &__location {
@@ -31,7 +26,12 @@
         height: 24px;
         margin: 0 auto 5px auto;
         border-radius: 9px;
-        background: #fff;
+        background: #77684f;
+        transition: transform 0.5s;
+        
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     &__select-btn {
@@ -44,6 +44,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        color: #fff;
     }
 
     &__delete-btn {
@@ -53,6 +54,15 @@
         background: none;
         border-left: 1px solid #000;
         cursor: pointer;
+        color: #fff;
+
+        &:hover {
+            color: #ea4335;
+        }
+    }
+
+    &__empty {
+        text-shadow: #fff 1px 0 24px;
     }
 
     &__clear-history {
@@ -67,8 +77,19 @@
         height: 24px;
         width: 150px;
         border-radius: 9px;
-        background: #fff;
+        background: #77684f;
         border: none;
         cursor: pointer;
+        color: #fff;
+
+        &:disabled {
+            cursor: not-allowed;
+            background: #595d62;
+            color: #000;
+        }
+
+        &:hover {
+            color: #ea4335;
+        }
     }
 }

@@ -6,7 +6,7 @@ export const LocationHistory = () => {
     const { locations, setLocation, deleteLocations, deleteLocationById } = useLocation();
     return (
         <div className="wa-location-history">
-            <div className="wa-location-history__header">History:</div>
+            <div className="wa-location-history__header">History</div>
             <div className="wa-location-history__content">
                 {locations && locations.length > 0 ? (
                     locations
@@ -23,11 +23,11 @@ export const LocationHistory = () => {
                             </div>
                         ))
                 ) : (
-                    <span>Location history is empty...</span>
+                    <span className="wa-location-history__empty">Location history is empty...</span>
                 )}
             </div>
             <div className="wa-location-history__clear-history">
-                <button onClick={deleteLocations} className="wa-location-history__clear-history-btn">
+                <button onClick={deleteLocations} className="wa-location-history__clear-history-btn" disabled={!locations || locations.length == 0}>
                     Clear history
                 </button>
             </div>
