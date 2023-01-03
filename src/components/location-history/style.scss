@@ -86,6 +86,10 @@
             cursor: not-allowed;
             background: #595d62;
             color: #000;
+
+            &:hover {
+                color: #000;
+            }
         }
 
         &:hover {

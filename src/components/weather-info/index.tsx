@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "../../store";
 import { getDirection, getTime } from "./helpers";
+import { Loader } from "../loader";
 import "./styles.scss";
 
 export const WeatherInfo = () => {
@@ -61,6 +62,6 @@ export const WeatherInfo = () => {
             </div>
         </div>
     ) : (
-        <div>loading ...</div>
+        <Loader />
     );
 };
