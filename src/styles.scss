@@ -13,9 +13,12 @@
 }
 
 body {
-    // height: 100vh;
-    // padding: 2% 16%;
     font-family: Arial, Helvetica, sans-serif;
+
+    &.disable-scrolling {
+        max-height: 100vh;
+        overflow: hidden;
+    }
 }
 
 #react-app {
