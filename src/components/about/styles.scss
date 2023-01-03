@@ -36,12 +36,18 @@
     }
 
     &__content {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 40px);
         padding: 50px;
         background: red;
-        width: 50vw;
-        height: 50vh;
+        border-radius: 9px;
         position: relative;
         transition: left 3s;
+
+        @media (min-width: 1100px) {
+            width: 50vw;
+            height: 50vh;
+        }
     }
 
     &__open-btn-wrapper {
@@ -56,7 +62,7 @@
             height: 40px;
 
             transition: top 3s;
-            
+
             &--hidden {
                 top: -40px;
             }
@@ -67,7 +73,7 @@
             bottom: 0;
             left: 0;
             width: 50px;
-            
+
             transition: left 3s;
 
             &--hidden {
@@ -77,12 +83,11 @@
     }
 
     &__open-btn {
-        
         font-size: 20px;
         background: #7d6b37;
         color: #111;
         cursor: pointer;
-        
+
         &:hover {
             background: #8e7c48;
         }
@@ -93,17 +98,14 @@
             border: none;
         }
 
-        
-
         @media (min-width: 1100px) {
             width: 100px;
-            height: 50px;   
+            height: 50px;
             transform: rotate(90deg) translate(40px, 26px);
             border-top-left-radius: 9px;
             border-top-right-radius: 9px;
             border: 2px solid #8e7c48;
             transition: color 0.5s;
         }
-
     }
 }
