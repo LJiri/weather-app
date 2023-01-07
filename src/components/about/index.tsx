@@ -31,7 +31,12 @@ export const About = () => {
                     <div className="wa-about__paragraphs">
                         <p>
                             This application was developed by Jiří Laudát, a front-end developer with 4 years of experience.
-                            <a href="https://www.linkedin.com/in/jirilaudat/" target="_blank" rel="noreferrer">
+                            <a
+                                href="https://www.linkedin.com/in/jirilaudat/"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="wa-about__link wa-about__link--linkedin"
+                            >
                                 Linkedin
                             </a>
                         </p>
@@ -43,7 +48,12 @@ export const About = () => {
                         <p>The history of searched locations is saved into Local Storage inside user’s browser.</p>
                         <p>
                             Project repository:{" "}
-                            <a href="https://github.com/LJiri/weather-app" target="_blank" rel="noreferrer">
+                            <a
+                                href="https://github.com/LJiri/weather-app"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="wa-about__link wa-about__link--github"
+                            >
                                 github
                             </a>
                         </p>

@@ -37,7 +37,7 @@
 
     &__content {
         width: calc(100vw - 40px);
-        height: calc(100vh - 80px);
+        height: 80vh;
         padding: 50px;
         border-radius: 9px;
         position: relative;
@@ -69,12 +69,29 @@
 
         &::-webkit-scrollbar {
             width: 10px;
-          }
+        }
 
-          &::-webkit-scrollbar-track {
+        &::-webkit-scrollbar-track {
             background: #7d6b37;
             border-radius: 9px;
-          }
+        }
+    }
+
+    &__link {
+        color: #fff;
+        border-radius: 9px;
+        padding: 10px;
+        padding: 4px 10px;
+        text-decoration: none;
+        margin-left: 10px;
+
+        &--linkedin {
+            background: #0a66c2;
+        }
+
+        &--github {
+            background: #24292f;
+        }
     }
 
     &__close-btn {
