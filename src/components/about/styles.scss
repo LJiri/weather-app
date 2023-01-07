@@ -37,16 +37,57 @@
 
     &__content {
         width: calc(100vw - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100vh - 80px);
         padding: 50px;
-        background: red;
         border-radius: 9px;
         position: relative;
         transition: left 3s;
+        background: #8e7c48;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
 
         @media (min-width: 1100px) {
             width: 50vw;
             height: 50vh;
+        }
+    }
+
+    &__content-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    &__paragraphs {
+        height: 100%;
+        overflow: auto;
+        line-height: 26px;
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 10px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #7d6b37;
+            border-radius: 9px;
+          }
+    }
+
+    &__close-btn {
+        border: 1px solid #7d6b37;
+        background: #8e7c48;
+        width: 100px;
+        height: 30px;
+        border-radius: 9px;
+        margin: 20px auto 0 auto;
+        cursor: pointer;
+
+        &:hover {
+            background: #7d6b37;
         }
     }
 

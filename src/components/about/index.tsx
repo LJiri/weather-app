@@ -27,11 +27,30 @@ export const About = () => {
 
             <div className={classNames("wa-about", open && "wa-about--open")}>
                 <div className="wa-about__content">
+                    <h2 className="wa-about__content-header">About Weather App</h2>
+                    <div className="wa-about__paragraphs">
+                        <p>
+                            This application was developed by Jiří Laudát, a front-end developer with 4 years of experience.
+                            <a href="https://www.linkedin.com/in/jirilaudat/" target="_blank" rel="noreferrer">
+                                Linkedin
+                            </a>
+                        </p>
+                        <p>It is programmed in TypeScript using the React library. Modules are bundled by Webpack.</p>
+                        <p>
+                            Geolocation data, latitude and longitude, are retrieved through Google Maps API. These coordinates are then used to search
+                            current weather information of the particular location via Open Weather API.
+                        </p>
+                        <p>The history of searched locations is saved into Local Storage inside user’s browser.</p>
+                        <p>
+                            Project repository:{" "}
+                            <a href="https://github.com/LJiri/weather-app" target="_blank" rel="noreferrer">
+                                github
+                            </a>
+                        </p>
+                    </div>
                     <button className="wa-about__close-btn" onClick={onClose}>
-                        close
+                        Close
                     </button>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quis maiores nulla autem qui necessitatibus consectetur non,
-                    quibusdam, neque expedita et officia optio voluptatem velit unde quae quas aspernatur praesentium.
                 </div>
             </div>
         </>
