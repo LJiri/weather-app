@@ -65,6 +65,7 @@ const useLocationSource = (): {
                 description: data.weather[0]?.description,
                 sunrise: data?.sys?.sunrise,
                 sunset: data?.sys?.sunset,
+                timezone: data?.timezone,
             };
             locationStorage.save({ coords, name: data.name });
             dispatch({ type: "SET_LOCATION", payload: { weather: weather, location: coords } });

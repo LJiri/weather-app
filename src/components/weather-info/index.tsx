@@ -50,12 +50,12 @@ export const WeatherInfo = () => {
                     )}
                     {weather?.sunrise ? (
                         <div>
-                            Sunrise: <span className="wa-weather-info__value">{getTime(weather?.sunrise)}</span>
+                            Sunrise: <span className="wa-weather-info__value">{getTime(weather?.sunrise, weather?.timezone)}</span>
                         </div>
                     ) : null}
                     {weather?.sunset ? (
                         <div>
-                            Sunset: <span className="wa-weather-info__value">{getTime(weather?.sunset)}</span>
+                            Sunset: <span className="wa-weather-info__value">{getTime(weather?.sunset, weather?.timezone)}</span>
                         </div>
                     ) : null}
                 </div>

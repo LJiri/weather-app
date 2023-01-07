@@ -14,6 +14,7 @@ export interface Weather {
     description: string;
     sunrise: string;
     sunset: string;
+    timezone: string;
 }
 
 export interface LocationSourceState {

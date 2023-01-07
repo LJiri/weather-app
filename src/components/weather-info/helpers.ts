@@ -34,10 +34,10 @@ export const getDirection = (deg: number) => {
     }
 };
 
-export const getTime = (unix: string) => {
-    const miliseconds = Number(unix) * 1000;
+export const getTime = (unix: string, timezone: string) => {
+    const miliseconds = (Number(unix) + Number(timezone)) * 1000;
     const date = new Date(miliseconds);
-    const minutes = date.getMinutes();
+    const minutes = date.getUTCMinutes();
 
-    return `${date.getHours()}:${minutes < 10 ? "0" + minutes : minutes}`;
+    return `${date.getUTCHours()}:${minutes < 10 ? "0" + minutes : minutes}`;
 };
