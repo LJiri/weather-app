@@ -1,10 +1,8 @@
 .wa-home-page {
-    $blue: #344a6e;
-    $yellow: #7d6b37;
-    $spacing: 20px;
+    --spacing: 20px;
 
     display: grid;
-    gap: $spacing;
+    gap: var(--spacing);
 
     @media (min-width: 1100px) {
         grid-template-columns: 8fr auto;
@@ -13,11 +11,11 @@
     }
 
     &__container {
-        padding: 60px $spacing $spacing;
+        padding: 60px var(--spacing) var(--spacing);
         background: #45604d;
 
         @media (min-width: 1100px) {
-            padding: $spacing 60px;
+            padding: var(--spacing) 60px;
             width: 100vw;
             height: 100vh;
         }
@@ -31,7 +29,7 @@
     & > div {
         border-radius: 9px;
         background: #344a6e;
-        border: 2px solid #7d6b37;;
+        border: 2px solid #7d6b37;
     }
 
     &__map {
@@ -44,11 +42,11 @@
     }
 
     &__weather-info {
-        padding: $spacing;
+        padding: var(--spacing);
     }
 
     &__map-header {
-        padding: $spacing;
+        padding: var(--spacing);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -61,7 +59,7 @@
     }
 
     &__weather-location-history {
-        padding: $spacing 0;
+        padding: var(--spacing) 0;
         height: 40vh;
 
         @media (min-width: 1100px) {
